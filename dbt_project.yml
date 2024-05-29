@@ -1,7 +1,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'snowdbt_tutorial'
+name: 'snowdbt_dataops'
 version: '1.0.0'
 config-version: 2
 
@@ -44,7 +44,7 @@ models:
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- else -%} SNOWDBT_TUTO
         {%- endif -%}
       +schema: RAW_DATA
     2_intermediate:
@@ -54,7 +54,7 @@ models:
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- else -%} SNOWDBT_TUTO
         {%- endif -%}
       +schema: MODEL_WRK
     3_marts:
@@ -64,7 +64,7 @@ models:
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- else -%} SNOWDBT_TUTO
         {%- endif -%}
       +schema: MODEL_DATA
     utilities:
