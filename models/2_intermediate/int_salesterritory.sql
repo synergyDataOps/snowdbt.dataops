@@ -3,7 +3,7 @@ WITH salesterritory AS (
 )
 SELECT
      TerritoryID
-    ,cast(Name as varchar(50)) AS SalesTerritoryName
+    ,cast(Name as varchar(60)) AS SalesTerritoryName
     ,CountryRegionCode
     ,"GROUP"
     ,SalesYTD
