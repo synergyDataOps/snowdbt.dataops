@@ -1,7 +1,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'snowdbt_tutorial'
+name: 'snowdbt_dataops'
 version: '1.0.0'
 config-version: 2
 
@@ -36,15 +36,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
-  snowdbt_tutorial:
+  snowdbt_dataops:
     # Config indicated by + and applies to all files under models/marts/, models/intermediate/, ...
     1_staging:
       +materialized: view
       +database: |
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: RAW_DATA
     2_intermediate:
@@ -52,9 +53,10 @@ models:
       +transient: true
       +database: |
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: MODEL_WRK
     3_marts:
@@ -62,9 +64,10 @@ models:
       +transient: false
       +database: |
         {%- if  target.name == "dev" -%} SNOWDBT_TUTO
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} invalid_database
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: MODEL_DATA
     utilities:
