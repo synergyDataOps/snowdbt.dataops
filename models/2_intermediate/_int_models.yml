@@ -4,7 +4,7 @@ models:
     columns:
       - name: productid
         data_type: number
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: productname
