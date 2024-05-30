@@ -7,7 +7,7 @@ select
     ,NameStyle
     ,Title
     ,cast(FirstName as varchar(50)) AS FirstName
-    ,cast(MiddleName as varchar(50)) AS MiddleName
+    ,cast(MiddleName as varchar(100)) AS MiddleName
     ,cast(LastName as varchar(50)) AS LastName
     ,Suffix
     ,EmailPromotion
