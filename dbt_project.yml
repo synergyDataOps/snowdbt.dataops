@@ -36,42 +36,39 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
-  snowdbt_tutorial:
+  snowdbt_dataops:
     # Config indicated by + and applies to all files under models/marts/, models/intermediate/, ...
     1_staging:
       +materialized: view
-      # +database: |
-      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "qa"  -%} snowdbt_sample
-      #   {%- elif target.name == "prod"  -%} snowdbt_poc
-      #   {%- else -%} Invalid_database
-      #   {%- endif -%}
-      +database: SNOWDBT_TUTOX
+      +database: |
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
+        {%- endif -%}
       +schema: RAW_DATA
     2_intermediate:
       +materialized: table
       +transient: true
-      # +database: |
-      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "qa"  -%} snowdbt_sample
-      #   {%- elif target.name == "prod"  -%} snowdbt_poc
-      #   {%- else -%} Invalid_database
-      #   {%- endif -%}
-      +database: SNOWDBT_TUTOX
+      +database: |
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
+        {%- endif -%}
       +schema: MODEL_WRK
     3_marts:
       +materialized: table
       +transient: false
-      # +database: |
-      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-      #   {%- elif target.name == "qa"  -%} snowdbt_sample
-      #   {%- elif target.name == "prod"  -%} snowdbt_poc
-      #   {%- else -%} Invalid_database
-      #   {%- endif -%}
-      +database: SNOWDBT_TUTOX
+      +database: |
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
+        {%- endif -%}
       +schema: MODEL_DATA
     utilities:
       +materialized: view
