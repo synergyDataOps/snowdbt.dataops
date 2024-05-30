@@ -40,35 +40,38 @@ models:
     # Config indicated by + and applies to all files under models/marts/, models/intermediate/, ...
     1_staging:
       +materialized: view
-      +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} Invalid_database
-        {%- endif -%}
+      # +database: |
+      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "qa"  -%} snowdbt_sample
+      #   {%- elif target.name == "prod"  -%} snowdbt_poc
+      #   {%- else -%} Invalid_database
+      #   {%- endif -%}
+      +database: SNOWDBT_TUTOX
       +schema: RAW_DATA
     2_intermediate:
       +materialized: table
       +transient: true
-      +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} Invalid_database
-        {%- endif -%}
+      # +database: |
+      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "qa"  -%} snowdbt_sample
+      #   {%- elif target.name == "prod"  -%} snowdbt_poc
+      #   {%- else -%} Invalid_database
+      #   {%- endif -%}
+      +database: SNOWDBT_TUTOX
       +schema: MODEL_WRK
     3_marts:
       +materialized: table
       +transient: false
-      +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
-        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
-        {%- elif target.name == "qa"  -%} snowdbt_sample
-        {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} Invalid_database
-        {%- endif -%}
+      # +database: |
+      #   {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
+      #   {%- elif target.name == "qa"  -%} snowdbt_sample
+      #   {%- elif target.name == "prod"  -%} snowdbt_poc
+      #   {%- else -%} Invalid_database
+      #   {%- endif -%}
+      +database: SNOWDBT_TUTOX
       +schema: MODEL_DATA
     utilities:
       +materialized: view
