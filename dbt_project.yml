@@ -41,30 +41,33 @@ models:
     1_staging:
       +materialized: view
       +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} SNOWDBT_TUTO
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: RAW_DATA
     2_intermediate:
       +materialized: table
       +transient: true
       +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} SNOWDBT_TUTO
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: MODEL_WRK
     3_marts:
       +materialized: table
       +transient: false
       +database: |
-        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTOX
+        {%- elif target.name == "development"  -%} SNOWDBT_TUTOX
         {%- elif target.name == "qa"  -%} snowdbt_sample
         {%- elif target.name == "prod"  -%} snowdbt_poc
-        {%- else -%} SNOWDBT_TUTO
+        {%- else -%} Invalid_database
         {%- endif -%}
       +schema: MODEL_DATA
     utilities:
