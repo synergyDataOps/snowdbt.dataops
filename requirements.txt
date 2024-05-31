@@ -1,0 +1,4 @@
+dbt-snowflake==1.8.2
+sqlfluff==3.0.7
+pre-commit==3.5.0
+snowflake-connector-python==3.10.1
