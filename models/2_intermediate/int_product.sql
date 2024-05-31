@@ -3,7 +3,7 @@ with product as (
 )
 select
      ProductID
-    ,cast(Name as varchar(50)) AS ProductName
+    ,cast(Name as varchar(60)) AS ProductName
     ,ProductNumber
     ,MakeFlag
     ,FinishedGoodsFlag

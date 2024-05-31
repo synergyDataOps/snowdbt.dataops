@@ -1,4 +1,4 @@
-name: CI_PR
+name: CI_PR_DATAOPS
 run-name: ${{ github.actor }} lints & tests
 on:
  pull_request:
