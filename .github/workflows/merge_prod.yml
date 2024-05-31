@@ -1,0 +1,32 @@
+name: Deploy_dbt_prod
+run-name: ${{ github.actor }} deploys dbt prod
+on:
+  push:
+    branches:
+      - prod
+
+jobs: 
+  prod:
+    runs-on: ubuntu-latest
+    env:
+      SNOWFLAKE_PASSWORD_DBT_PROD: ${{ secrets.SNOWFLAKE_PASSWORD_DBT_DEV }}
+      DBT_ENV_SECRET_GIT_TOKEN: ${{ secrets.DBT_ENV_SECRET_GIT_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: ./.github/actions/install-python
+        with:
+          RequirementFilePath: ./requirements.txt
+
+      - name: Deploy dbt prod
+        env:
+           PROD_SCHEMA_NAME: ${{ vars.PROD_SCHEMA_NAME }}
+           DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+        run: |
+           dbt clean
+           dbt deps --target prod
+           dbt run -s 1_staging --target prod
+           dbt run -s 2_intermediate --target prod
+           dbt run -s 3_marts --target prod
+           dbt compile --target prod # génère la documentation 

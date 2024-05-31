@@ -1,0 +1,26 @@
+name: Get manifest dbt from s3
+description: "Get manifest.json dbt file from S3 for slim CI"
+
+inputs:
+  aws_region:
+    required: false
+    default: eu-west-1
+  AWS_ACCESS_KEY_ID:
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ inputs.aws_region }}
+
+    - name: Get manifest file from s3 bucket
+      shell: bash
+      run: |
+        aws s3 cp s3://dbt-github-actions-manifest-location/manifest.json ./
