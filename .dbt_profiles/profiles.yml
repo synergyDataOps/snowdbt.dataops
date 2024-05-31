@@ -3,7 +3,7 @@ snowdbt_dataops:
   outputs:
     dev:
       type: snowflake
-      account: ip60316.eu-west-1 
+      account: ip60317.eu-west-1 
       user: PREY
       password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_DEV')}}"
       database: SNOWDBT_TUTO
@@ -13,7 +13,7 @@ snowdbt_dataops:
       threads: 4
     qa:
       type: snowflake
-      account: ip60316.eu-west-1 
+      account: ip60317.eu-west-1 
       user: PREY
       password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_QA')}}"
       database: SNOWDBT_TUTO
