@@ -1,0 +1,73 @@
+name: CI_PR
+run-name: ${{ github.actor }} lints & tests
+on:
+ pull_request:
+   branches:
+     - dev
+
+
+jobs:
+  lint_dbt:
+    name: lint_dbt
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+
+      - uses: ./.github/actions/install-python
+        with:
+          RequirementFilePath: ./requirements.txt
+    
+      - name: Linting
+        run: |
+          sqlfluff lint --dialect snowflake
+  test_ci:
+    name: test_dbt_ci
+    runs-on: ubuntu-latest
+    env:
+      SNOWFLAKE_PASSWORD_DBT_QA: ${{ secrets.SNOWFLAKE_PASSWORD_DBT_DEV }}
+      DBT_ENV_SECRET_GIT_TOKEN: ${{ secrets.DBT_ENV_SECRET_GIT_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+ 
+      - uses: ./.github/actions/install-python
+        with:
+          RequirementFilePath: ./requirements.txt
+
+      - name: Integration tests
+        env:
+          PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
+          DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+        run: |
+          dbt clean
+          dbt deps --target qa
+          dbt run -s 1_staging --target qa
+          dbt run -s 2_intermediate --target qa
+          dbt run -s 3_marts --target qa
+
+      # - name: Get manifest from s3
+      #   uses: ./.github/actions/get-manifest-dbt
+      #   with:
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        
+      # - name: Check manifest exist
+      #   id: check_manifest
+      #   run: ./cicd/check_manifest.sh
+  
+      # - name: Integration tests
+      #   env:
+      #     PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
+      #     DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+      #     REMOTE_MANIFEST_EXISTS: ${{ steps.check_manifest.outputs.REMOTE_MANIFEST_EXISTS }}
+      #   run: |
+      #     if [ $REMOTE_MANIFEST_EXISTS = "True" ]; then modified="--select @state:modified --state ./"; else modified=""; fi
+      #     dbt deps --target ci
+      #     dbt seed --full-refresh --target ci
+      #     dbt run $modified --target ci
+      #     dbt test $modified --target ci
+ 

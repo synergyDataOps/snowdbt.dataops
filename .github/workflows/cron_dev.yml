@@ -1,0 +1,30 @@
+name: scheduled_run_dev
+
+on:
+  schedule:
+    - cron: '55 16 1 * *'
+
+jobs: 
+  scheduled_run:
+    name: scheduled_run
+    runs-on: ubuntu-latest
+    env:
+      SNOWFLAKE_PASSWORD_DBT_DEV: ${{ secrets.SNOWFLAKE_PASSWORD_DBT_DEV }}
+      DBT_ENV_SECRET_GIT_TOKEN: ${{ secrets.DBT_ENV_SECRET_GIT_TOKEN }}
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v2
+
+      - uses: ./.github/actions/install-python
+        with:
+          RequirementFilePath: ./requirements.txt
+
+      - name: Run dbt
+        env:
+          DEV_SCHEMA_NAME: ${{ vars.DEV_SCHEMA_NAME }}
+          DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+        run: |
+          dbt deps --target dev
+          dbt run --target dev
+          dbt test --target dev
