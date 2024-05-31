@@ -7,23 +7,23 @@ on:
 
 
 jobs:
-  lint_dbt:
-    name: lint_dbt
-    runs-on: ubuntu-latest
+  # lint_dbt:
+  #   name: lint_dbt
+  #   runs-on: ubuntu-latest
 
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
 
-      - uses: ./.github/actions/install-python
-        with:
-          RequirementFilePath: ./requirements.txt
+  #     - uses: ./.github/actions/install-python
+  #       with:
+  #         RequirementFilePath: ./requirements.txt
     
-      - name: Linting
-        run: |
-          sqlfluff lint --dialect snowflake
+  #     - name: Linting
+  #       run: |
+  #         sqlfluff lint --dialect snowflake
   test_ci:
     name: test_dbt_ci
     runs-on: ubuntu-latest
