@@ -1,0 +1,49 @@
+name: Deploy_dbt_dev
+run-name: ${{ github.actor }} deploys dbt
+on:
+  push:
+    branches:
+      - dev
+     
+permissions: write-all
+
+
+jobs:
+  dev:
+    runs-on: ubuntu-latest
+    env:
+      SNOWFLAKE_PASSWORD_DBT_DEV: ${{ secrets.SNOWFLAKE_PASSWORD_DBT_DEV }}
+      DBT_ENV_SECRET_GIT_TOKEN: ${{ secrets.DBT_ENV_SECRET_GIT_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - uses: ./.github/actions/install-python
+        with:
+          RequirementFilePath: ./requirements.txt
+      
+      - name: Deploy dbt dev
+        env:
+           DEV_SCHEMA_NAME: ${{ vars.DEV_SCHEMA_NAME }}
+           DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+        run: |
+           dbt clean
+           dbt deps
+           dbt run -s 1_staging --target dev
+           dbt run -s 2_intermediate --target dev
+           dbt run -s 3_marts --target dev
+           dbt compile --target dev # génère la documentation 
+
+      # - name: Publish manifest to s3 
+      #   uses: ./.github/actions/publish-manifest-dbt
+      #   with:
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    
+      # - name: Publish docs gh-pages
+      #   env:
+      #     DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+      #     DEV_SCHEMA_NAME: ${{ vars.DEV_SCHEMA_NAME }}
+      #   run: ./cicd/publish_docs.sh
+
+

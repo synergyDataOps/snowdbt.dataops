@@ -1,0 +1,33 @@
+snowdbt_dataops:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ip60316.eu-west-1 
+      user: PREY
+      password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_DEV')}}"
+      database: SNOWDBT_TUTO
+      schema: "{{env_var('DEV_SCHEMA_NAME')}}"
+      role: SYSADMIN
+      warehouse: SNOWDBT_XS
+      threads: 4
+    qa:
+      type: snowflake
+      account: ip60316.eu-west-1 
+      user: PREY
+      password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_QA')}}"
+      database: SNOWDBT_TUTO
+      schema: "{{env_var('PR_SCHEMA_NAME')}}"
+      role: SYSADMIN
+      warehouse: SNOWDBT_XS
+      threads: 4
+    prod:
+      type: snowflake
+      account: ip60316.eu-west-1 
+      user: PREY
+      password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_PROD')}}"
+      database: SNOWDBT_TUTO
+      schema: "{{env_var('PROD_SCHEMA_NAME')}}"
+      role: SYSADMIN
+      warehouse: SNOWDBT_XS
+      threads: 4

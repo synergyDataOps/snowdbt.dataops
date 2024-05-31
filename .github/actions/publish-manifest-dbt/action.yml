@@ -1,0 +1,26 @@
+name: Publish manifest dbt to s3
+description: "Publish manifest.json dbt file to S3 for slim CI"
+
+inputs:
+  aws_region:
+    required: false
+    default: eu-west-1
+  AWS_ACCESS_KEY_ID:
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ inputs.aws_region }}
+
+    - name: Copy manifest file to s3 bucket
+      shell: bash
+      run: |
+        aws s3 cp ./target/manifest.json s3://dbt-github-actions-manifest-location/
