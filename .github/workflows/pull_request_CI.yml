@@ -1,4 +1,4 @@
-name: CI_PR
+name: CI_PR_DATAOPS
 run-name: ${{ github.actor }} lints & tests
 on:
  pull_request:
@@ -39,7 +39,8 @@ jobs:
 
       - name: Integration tests
         env:
-          PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
+          # PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
+          PR_SCHEMA_NAME: ${{ vars.DEV_SCHEMA_NAME }}
           DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
         run: |
           dbt clean
