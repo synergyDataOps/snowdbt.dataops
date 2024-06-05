@@ -6,7 +6,7 @@ Pour exécuter des modèles :
 
 > $ dbt clean & dbt deps
 
-> $ dbt run -s 1_staging # par les répertoires
+> $ dbt run -s 1_staging # by sub folders
 
 > $ dbt run -s 2_intermediate
 
@@ -15,10 +15,16 @@ Pour exécuter des modèles :
 Pour exécuter des tests :
 
 > $ dbt test --select "source:*"  # all sources
->
+
 > $ dbt test --select source:raw_data  # all sources
->
+
 > $ dbt test --select source:raw_data.address # one source table only
+
+> $ dbt test -s 1_staging # by sub folders
+
+> $ dbt test -s 2_intermediate
+
+> $ dbt test -s 3_marts
 
 ## Modèle Adventure Works Sales < Source >
 
