@@ -50,9 +50,9 @@ jobs:
           # dbt test -s 2_intermediate --target qa
           # dbt run -s 3_marts --target qa
           # dbt test -s 3_marts --target qa
-          dbt build -s 1_staging --target dev
-          dbt build -s 2_intermediate --target dev
-          dbt build -s 3_marts --target dev
+          dbt build -s 1_staging --target qa
+          dbt build -s 2_intermediate --target qa
+          dbt build -s 3_marts --target qa
 
       # - name: Get manifest from s3
       #   uses: ./.github/actions/get-manifest-dbt
