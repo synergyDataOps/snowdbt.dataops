@@ -408,6 +408,10 @@ models:
         data_type: varchar
         description: A unique identifier for each customer, used for joining and
           aggregating data in analytical scenarios.
+        tests:
+          - relationships:
+              field: CUSTOMER_KEY
+              to: ref('dim_customer')
       - name: creditcard_key
         data_type: varchar
         description: A unique identifier for each credit card used in the sales
@@ -487,6 +491,20 @@ models:
           by multiplying the unit price of the product by the order quantity.
           Useful for analyzing revenue, sales performance, and identifying
           top-selling products.
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between: 
+              # this will perform what the dbt_utils.expression-is-true test does!
+              min_value: 0
+              row_condition: "customerid is not null" 
+              strictly: false
+          # - average_dollars_spent_greater_than_one:
+          #     group_by_column: customerid
+          - dbt_expectations.expect_column_mean_to_be_between: 
+              # this will perform what our singular and generic tests do!
+              min_value: 1
+              group_by: [customerid] 
+              row_condition: "customerid is not null" # (Optional)
+              strictly: false
       - name: totaldiscount
         data_type: number
         description: The total discount applied to the sales order detail, representing

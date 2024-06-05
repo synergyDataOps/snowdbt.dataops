@@ -9,7 +9,7 @@ select
     {{ dbt_utils.generate_surrogate_key(['productid']) }} as product_key, -- dim_product
     {{ dbt_utils.generate_surrogate_key(['customerid']) }} as customer_key, -- dim_customer
     {{ dbt_utils.generate_surrogate_key(['creditcardid']) }} as creditcard_key, -- ? Sales.CreditCard Credit card identification number. Foreign key to CreditCard.CreditCardID.?
-    {{ dbt_utils.generate_surrogate_key(['shiptoaddressid']) }} as ship_address_key, -- ? Person.Address Customer shipping address. Foreign key to Address.AddressID. ?
+    {{ dbt_utils.generate_surrogate_key(['shiptoaddressid']) }} as ship_address_key, --  Person.Address Customer shipping address. Foreign key to Address.AddressID. 
     {{ dbt_utils.generate_surrogate_key(['status']) }} as order_status_key, -- dim_orderstatus
     {{ dbt_utils.generate_surrogate_key(['orderdate']) }} as order_date_key,
     {{ dbt_utils.generate_surrogate_key(['shipdate']) }} as ship_date_key,
