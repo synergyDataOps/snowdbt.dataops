@@ -4,5 +4,11 @@ packages:
 - package: dbt-labs/codegen
   version: 0.11.0
 - package: calogica/dbt_date
-  version: 0.7.2
-sha1_hash: 666169585a6f6557dea9292ff09ef6ba95162acf
+  version: 0.10.0
+- package: dbt-labs/audit_helper
+  version: 0.10.0
+- package: calogica/dbt_expectations
+  version: 0.10.3
+- package: tnightengale/dbt_meta_testing
+  version: 0.3.6
+sha1_hash: 41308999e0e969d05bba5b311c1b0ee8a62d3466

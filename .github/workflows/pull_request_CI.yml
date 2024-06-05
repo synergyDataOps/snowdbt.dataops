@@ -39,15 +39,20 @@ jobs:
 
       - name: Integration tests
         env:
-          # PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
-          PR_SCHEMA_NAME: ${{ vars.DEV_SCHEMA_NAME }}
+          PR_SCHEMA_NAME: DBT_CI_${{ github.event.number }}
           DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
         run: |
           dbt clean
           dbt deps --target qa
-          dbt run -s 1_staging --target qa
-          dbt run -s 2_intermediate --target qa
-          dbt run -s 3_marts --target qa
+          # dbt run -s 1_staging --target qa
+          # dbt test -s 1_staging --target qa
+          # dbt run -s 2_intermediate --target qa
+          # dbt test -s 2_intermediate --target qa
+          # dbt run -s 3_marts --target qa
+          # dbt test -s 3_marts --target qa
+          dbt build -s 1_staging --target qa
+          dbt build -s 2_intermediate --target qa
+          dbt build -s 3_marts --target qa
 
       # - name: Get manifest from s3
       #   uses: ./.github/actions/get-manifest-dbt
