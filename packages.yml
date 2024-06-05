@@ -5,7 +5,13 @@ packages:
   - package: dbt-labs/codegen
     version: 0.11.0
   - package: calogica/dbt_date
-    version: 0.7.2
+    version: 0.10.0
+  - package: dbt-labs/audit_helper
+    version: 0.10.0
+  - package: calogica/dbt_expectations
+    version: 0.10.3
+  - package: tnightengale/dbt_meta_testing
+    version: 0.3.6
 # https://github.com/dbt-labs/dbt-codegen
 #  - local: sub-project 
 # https://courses.getdbt.com/courses/take/jinja-macros-packages/lessons/30195115-installing-packages

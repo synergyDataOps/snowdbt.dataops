@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://json.schemastore.org/github-action.json": "file:///c%3A/Users/reyp/Repos/snowdbt.dataops/.github/actions/install-python/action.yml"
-    }
+    },
+    "dbt.enableNewLineagePanel": true
 }

@@ -7,6 +7,9 @@ sources:
         columns:
           - name: addressid
             data_type: number
+            tests:
+              - unique
+              - not_null
           - name: addressline1
             data_type: varchar
           - name: addressline2
@@ -174,6 +177,9 @@ sources:
             data_type: varchar
           - name: customerid
             data_type: number
+            tests:
+              - unique
+              - not_null
           - name: modifieddate
             data_type: timestamp_ntz
           - name: personid
@@ -461,7 +467,7 @@ sources:
             data_type: varchar
 
       - name: productcategory
-        columns:
+        columns: 
           - name: modifieddate
             data_type: timestamp_ntz
           - name: name

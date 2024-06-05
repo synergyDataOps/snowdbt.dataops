@@ -7,5 +7,5 @@ select
     int_stateprovince.statprovincename as state_name,
     int_countryregion.countryregionname as country_name
 from {{ ref("stg_raw_data__address") }} as stg_raw_data__address
-left join {{ ref("int_stateprovince") }} on stg_raw_data__address.stateprovinceid = int_stateprovince.stateprovinceid
-left join {{ ref("int_countryregion") }} on int_stateprovince.countryregioncode = int_countryregion.countryregioncode
+     left join {{ ref("int_stateprovince") }} on stg_raw_data__address.stateprovinceid = int_stateprovince.stateprovinceid
+     left join {{ ref("int_countryregion") }} on int_stateprovince.countryregioncode = int_countryregion.countryregioncode
