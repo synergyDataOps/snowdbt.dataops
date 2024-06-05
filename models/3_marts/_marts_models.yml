@@ -495,15 +495,15 @@ models:
           - dbt_expectations.expect_column_values_to_be_between: 
               # this will perform what the dbt_utils.expression-is-true test does!
               min_value: 0
-              row_condition: "customerid is not null" 
+              row_condition: "customer_key is not null" 
               strictly: false
           # - average_dollars_spent_greater_than_one:
-          #     group_by_column: customerid
+          #     group_by_column: customer_key
           - dbt_expectations.expect_column_mean_to_be_between: 
               # this will perform what our singular and generic tests do!
               min_value: 1
-              group_by: [customerid] 
-              row_condition: "customerid is not null" # (Optional)
+              group_by: [customer_key] 
+              row_condition: "customer_key is not null" # (Optional)
               strictly: false
       - name: totaldiscount
         data_type: number
