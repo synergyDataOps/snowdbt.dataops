@@ -1,4 +1,4 @@
-## Hello Everybody
+## Hello Everyone
 
 ## Commandes utiles
 
@@ -31,6 +31,8 @@ Pour exécuter des tests :
 [AdventureWorks_2019-modules-Sales](https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html)
 
 [https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html]([https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html]())
+
+![1720114784731](image/README/1720114784731.png)
 
 ## Modèle Datamart Sales < Cible >
 
