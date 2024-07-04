@@ -34,4 +34,4 @@ Pour exécuter des tests :
 
 ## Modèle Datamart Sales < Cible >
 
-![1717448760284](image/README/1717448760284.png)
+![1720108019504](image/README/1720108019504.png)

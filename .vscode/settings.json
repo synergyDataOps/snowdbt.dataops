@@ -7,5 +7,6 @@
         "": {
             "favorState": false
         }
-    }
+    },
+    "dbt.lineage.defaultExpansion": 1
 }
