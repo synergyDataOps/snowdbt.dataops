@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="datamart_SALES.erd">
+	<entities>
+		<data-source id="snowflake_jdbc-18d3075a180-42bf8ba3b7600d6">
+			<entity id="1" name="DIM_ADDRESS" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_ADDRESS" order="0" color-bg="0,128,255" x="949" y="1548">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="2" name="DIM_CUSTOMER" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_CUSTOMER" order="6" color-bg="0,128,255" x="23" y="677">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="3" name="DIM_DATE" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_DATE" order="1" color-bg="0,128,255" x="20" y="1508">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="4" name="DIM_ORDERSTATUS" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_ORDERSTATUS" order="2" color-bg="0,128,255" x="24" y="1236">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="5" name="DIM_PRODUCT" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_PRODUCT" order="3" color-bg="0,128,255" x="894" y="690">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="6" name="DIM_TERRITORY" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_TERRITORY" order="4" color-bg="0,128,255" x="923" y="1121">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="7" name="FCT_SALES" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES" order="5" color-bg="255,128,64" x="456" y="1073">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="vfk_DIM_ADDRESS_FCT_SALES" type="vfk" pk-ref="7" fk-ref="1"/>
+		<relation name="vfk_DIM_CUSTOMER_FCT_SALES" type="vfk" pk-ref="7" fk-ref="2"/>
+		<relation name="vfk_DIM_DATE_FCT_SALES" type="vfk" pk-ref="7" fk-ref="3"/>
+		<relation name="vfk_DIM_ORDERSTATUS_FCT_SALES" type="vfk" pk-ref="7" fk-ref="4"/>
+		<relation name="vfk_DIM_PRODUCT_FCT_SALES" type="vfk" pk-ref="7" fk-ref="5"/>
+		<relation name="vfk_DIM_TERRITORY_FCT_SALES" type="vfk" pk-ref="7" fk-ref="6"/>
+	</relations>
+</diagram>
