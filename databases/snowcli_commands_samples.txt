@@ -1,0 +1,29 @@
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow sql -f c:\Users\reyp\Repos\snowdbt.dataops\databases\SNOWDBT_TUTO\MODEL_DATA\tables\DIM_CUSTOMER.snowql
+create or alter TABLE SNOWDBT_TUTO.MODEL_DATA.DIM_CUSTOMER (
+        CUSTOMER_KEY VARCHAR(32),
+        CUSTOMERID NUMBER(5,0),
+        PERSONBUSINESSENTITYID NUMBER(5,0),
+        TITLE VARCHAR(16777216),
+        FULLNAME VARCHAR(101),
+        HOUSEOWNERFLAG VARCHAR(1),
+        OCCUPATION VARCHAR(40),
+        MARITALSTATUS VARCHAR(1),
+        COMMUTEDISTANCE VARCHAR(15),
+        EDUCATION VARCHAR(40),
+        NUMBERCARSOWNED NUMBER(38,0),
+        TOTALCHILDREN NUMBER(38,0),
+        BIRTHDATE TIMESTAMP_NTZ(9),
+        DATEFIRSTPURCHASE TIMESTAMP_NTZ(9),
+        COUNTRY VARCHAR(50),
+        CITY VARCHAR(16777216),
+        STATE VARCHAR(50),
+        POSTALCODE VARCHAR(16777216),
+        ADDRESSLINE1 VARCHAR(16777216),
+        ADDRESSLINE2 VARCHAR(16777216),
+        CONSTRAINT PK_CUSTOMER PRIMARY KEY (CUSTOMER_KEY)
+);
++----------------------------------+
+| status                           |
+|----------------------------------|
+| Statement executed successfully. |
++----------------------------------+
