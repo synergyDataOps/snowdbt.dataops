@@ -73,3 +73,13 @@ models:
     utilities:
       +materialized: view
       +schema: RAW_DATA
+    zzz_experimentation:
+      +materialized: table
+      +transient: true
+      +database: |
+        {%- if  target.name == "dev" -%} SNOWDBT_TUTO
+        {%- elif target.name == "default"  -%} SNOWDBT_TUTO
+        {%- elif target.name == "qa"  -%} SNOWDBT_TUTO_QA
+        {%- elif target.name == "prod"  -%} SNOWDBT_TUTO_PROD
+        {%- else -%} Invalid_database
+        {%- endif -%}

@@ -1,0 +1,1 @@
+select {{ dbt_utils.star(ref('stg_date')) }} from {{ ref('stg_date') }}

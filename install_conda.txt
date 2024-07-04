@@ -1,0 +1,12 @@
+conda install dbt-core
+conda install dbt-snowflake
+
+# Conda > managing environments
+# https://docs.conda.io/projects/conda/en/4.6.0/user-guide/tasks/manage-environments.html
+# 
+# conda env export > environment.yml
+#
+# conda list --explicit > spec-file.txt
+#
+
+
