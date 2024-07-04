@@ -42,3 +42,38 @@ C:\>pipx install snowflake-cli-labs
   These apps are now globally available
     - snow.exe
 done! ✨ 🌟 ✨
+
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection add
+Name for this connection: snowdbt_dataops
+Snowflake account name: ip60316.eu-west-1
+Snowflake username: PREY
+Snowflake password [optional]:
+Role for the connection [optional]: SYSADMIN
+Warehouse for the connection [optional]: SNOWDBT_XS
+Database for the connection [optional]: SNOWDBT_TUTO
+Schema for the connection [optional]: RAW_DATA
+Connection host [optional]:
+Connection port [optional]:
+Snowflake region [optional]:
+Authentication method [optional]:
+Path to private key file [optional]:
+Wrote new connection snowdbt_dataops to C:\Users\reyp\AppData\Local\snowflake\config.toml
+
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection set-default "snowdbt_dataops"   
+Default connection set to: snowdbt_dataops
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection test
++------------------------------------------------------------+
+| key             | value                                    |
+|-----------------+------------------------------------------|
+| Connection name | None                                     |
+| Status          | OK                                       |
+| Host            | ip60316.eu-west-1.snowflakecomputing.com |
+| Account         | ip60316                                  |
+| User            | PREY                                     |
+| Role            | SYSADMIN                                 |
+| Database        | SNOWDBT_TUTO                             |
+| Warehouse       | SNOWDBT_XS                               |
++------------------------------------------------------------+
