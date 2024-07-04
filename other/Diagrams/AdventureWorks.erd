@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="AdventureWorks.erd">
+	<entities>
+		<data-source id="microsoft-18d31c317d0-ac47731d89bd77f">
+			<entity id="1" name="Address" fq-name="AdventureWorks2019.Person.Address" order="0" x="488" y="63">
+				<path name="Person"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="2" name="BusinessEntityAddress" fq-name="AdventureWorks2019.Person.BusinessEntityAddress" order="1" x="805" y="3">
+				<path name="Person"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="3" name="CountryRegion" fq-name="AdventureWorks2019.Person.CountryRegion" order="2" x="1141" y="438">
+				<path name="Person"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="4" name="Person" fq-name="AdventureWorks2019.Person.Person" order="3" x="803" y="230">
+				<path name="Person"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="5" name="StateProvince" fq-name="AdventureWorks2019.Person.StateProvince" order="4" x="1087" y="78">
+				<path name="Person"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="6" name="Product" fq-name="AdventureWorks2019.Production.Product" order="5" color-bg="204,192,184" x="726" y="867">
+				<path name="Production"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="7" name="ProductCategory" fq-name="AdventureWorks2019.Production.ProductCategory" order="6" color-bg="204,192,184" x="1057" y="1069">
+				<path name="Production"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="8" name="ProductSubcategory" fq-name="AdventureWorks2019.Production.ProductSubcategory" order="7" color-bg="204,192,184" x="1039" y="878">
+				<path name="Production"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="9" name="Customer" fq-name="AdventureWorks2019.Sales.Customer" order="8" color-bg="228,255,181" x="493" y="447">
+				<path name="Sales"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="10" name="SalesOrderDetail" fq-name="AdventureWorks2019.Sales.SalesOrderDetail" order="9" color-bg="228,255,181" x="439" y="705">
+				<path name="Sales"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="11" name="SalesOrderHeader" fq-name="AdventureWorks2019.Sales.SalesOrderHeader" order="10" color-bg="228,255,181" x="47" y="335">
+				<path name="Sales"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+			<entity id="12" name="SalesTerritory" fq-name="AdventureWorks2019.Sales.SalesTerritory" order="11" color-bg="228,255,181" x="930" y="596">
+				<path name="Sales"/>
+				<path name="AdventureWorks2019"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="FK_BusinessEntityAddress_Address_AddressID" fq-name="Person.BusinessEntityAddress.FK_BusinessEntityAddress_Address_AddressID" type="fk" pk-ref="1" fk-ref="2"/>
+		<relation name="FK_SalesOrderHeader_Address_BillToAddressID" fq-name="Sales.SalesOrderHeader.FK_SalesOrderHeader_Address_BillToAddressID" type="fk" pk-ref="1" fk-ref="11"/>
+		<relation name="FK_SalesOrderHeader_Address_ShipToAddressID" fq-name="Sales.SalesOrderHeader.FK_SalesOrderHeader_Address_ShipToAddressID" type="fk" pk-ref="1" fk-ref="11"/>
+		<relation name="FK_StateProvince_CountryRegion_CountryRegionCode" fq-name="Person.StateProvince.FK_StateProvince_CountryRegion_CountryRegionCode" type="fk" pk-ref="3" fk-ref="5"/>
+		<relation name="FK_SalesTerritory_CountryRegion_CountryRegionCode" fq-name="Sales.SalesTerritory.FK_SalesTerritory_CountryRegion_CountryRegionCode" type="fk" pk-ref="3" fk-ref="12"/>
+		<relation name="FK_Customer_Person_PersonID" fq-name="Sales.Customer.FK_Customer_Person_PersonID" type="fk" pk-ref="4" fk-ref="9"/>
+		<relation name="FK_Address_StateProvince_StateProvinceID" fq-name="Person.Address.FK_Address_StateProvince_StateProvinceID" type="fk" pk-ref="5" fk-ref="1"/>
+		<relation name="SalesOrderDetail_Product_FK" fq-name="Sales.SalesOrderDetail.SalesOrderDetail_Product_FK" type="fk" pk-ref="6" fk-ref="10"/>
+		<relation name="FK_ProductSubcategory_ProductCategory_ProductCategoryID" fq-name="Production.ProductSubcategory.FK_ProductSubcategory_ProductCategory_ProductCategoryID" type="fk" pk-ref="7" fk-ref="8"/>
+		<relation name="FK_Product_ProductSubcategory_ProductSubcategoryID" fq-name="Production.Product.FK_Product_ProductSubcategory_ProductSubcategoryID" type="fk" pk-ref="8" fk-ref="6"/>
+		<relation name="FK_SalesOrderHeader_Customer_CustomerID" fq-name="Sales.SalesOrderHeader.FK_SalesOrderHeader_Customer_CustomerID" type="fk" pk-ref="9" fk-ref="11"/>
+		<relation name="FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" fq-name="Sales.SalesOrderDetail.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" type="fk" pk-ref="11" fk-ref="10"/>
+		<relation name="FK_StateProvince_SalesTerritory_TerritoryID" fq-name="Person.StateProvince.FK_StateProvince_SalesTerritory_TerritoryID" type="fk" pk-ref="12" fk-ref="5"/>
+		<relation name="FK_Customer_SalesTerritory_TerritoryID" fq-name="Sales.Customer.FK_Customer_SalesTerritory_TerritoryID" type="fk" pk-ref="12" fk-ref="9"/>
+		<relation name="FK_SalesOrderHeader_SalesTerritory_TerritoryID" fq-name="Sales.SalesOrderHeader.FK_SalesOrderHeader_SalesTerritory_TerritoryID" type="fk" pk-ref="12" fk-ref="11">
+			<bend type="abs" x="633" y="952"/>
+		</relation>
+	</relations>
+</diagram>
