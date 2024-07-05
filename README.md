@@ -26,7 +26,7 @@ Pour exécuter des tests :
 
 > $ dbt test -s 3_marts
 
-## Modèle Adventure Works Sales < Source >
+## Modèle AdventureWorks Sales < Source >
 
 [AdventureWorks_2019-modules-Sales](https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html)
 
