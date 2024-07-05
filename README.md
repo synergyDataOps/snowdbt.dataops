@@ -4,7 +4,7 @@
 
 Pour exécuter des modèles :
 
-> $ dbt clean & dbt deps
+> dbt clean & dbt deps
 
 > $ dbt run -s 1_staging # by sub folders
 
@@ -30,8 +30,6 @@ Pour exécuter des tests :
 
 [AdventureWorks_2019-modules-Sales](https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html)
 
-[https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html]([https://dataedo.com/samples/html/AdventureWorks/doc/AdventureWorks_2/modules/Sales_12/module.html]())
-
 ![1720114784731](image/README/1720114784731.png)
 
 ## Modèle Datamart Sales < Cible >
@@ -40,7 +38,7 @@ Pour exécuter des tests :
 
 ## dbt Data Pipeline < Transformation >
 
-![1720174404669](image/README/1720174404669.png)
+![1720192684966](image/README/1720192684966.png)
 
 ### Main components list
 
@@ -83,10 +81,32 @@ Permanent Tables for the final datamart : ( folder 3_marts )
 ### Data Preparation (intermediate transformations)
 
 * Product
-    *to cast or convert and to rename the following data : ProductName, ProductCategory, ProductSubCategory*
+  *to cast or convert and to rename the following data : ProductName, ProductCategory, ProductSubCategory*
 * Person
-    *blabla...*
+  *to cast or convert and to rename the following data : FirstName, MiddleName, LastName
+  to parse and extract data from an XML column : Demographics*
 * Sales Territory, State Province
-    *blabla...*
+  to cast or convert and to rename the following data : SalesTerritoryName, StatProvinceName
 * Sales Order Header
-    *blabla...*
+  *to decode boulean data into Y/N code*
+  *to cast or convert and to rename the following data : PurchaseOrderNumber, AccountNumber*
+
+### Sales Datamart Design
+
+* Analysis axes
+
+| Name         | Dimension       | source(s)                                                                                                                                                | Transformation(s)                                                                                                                                                                                 |
+| ------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer     | dim_customer    | stg_raw_data__customer<br />int_person<br />stg_raw_data__address<br />stg_raw_data__businessentityaddress<br />int_stateprovince<br />int_countryregion | adding the surrogate key "customer key"<br />concatenation of full name (first_name + last_name)                                                                                                  |
+| product      | dim_product     | int_product<br />int_productcategory<br />int_productsubcategory                                                                                         | adding the surrogate key "product_key"<br />renaming the following columns : <br />product_subcategory_name and product_category_name                                                           |
+| order status | dim_orderstatus | int_salesorderheader                                                                                                                                     | adding the surrogate key "order_status_key"<br />decoding of order status codes by labels                                                                                                         |
+| address      | dim_address     | stg_raw_data__address<br />int_stateprovince<br />int_countryregion                                                                                      | adding the surrogate key "address_key"<br />concatenation of full address line (addressline1 + addressline2)<br />renaming the following columns : <br />city_name, state_name, country_name |
+| territory    | dim_territory   | int_salesterritory                                                                                                                                       | adding the surrogate key "territory_key"<br />renaming the "territory_group" column                                                                                                               |
+
+* Analysis topic
+  * name : Sales
+  * fact : fact_sales
+  * sources : stg_raw_data__salesorderdetail, int_salesorderheader
+  * transformations :
+    * add the following serogate keys : sales_key, product_key, customer_key, creditcard_key, ship_address_key, order_status_key, order_date_key,  ship_date_key, due_date_key, territory_key
+    * calculate the total discount amount

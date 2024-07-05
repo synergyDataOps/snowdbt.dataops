@@ -3,6 +3,7 @@
 --depends_on: {{  ref( 'dim_territory' )  }}
 --depends_on: {{  ref( 'dim_date' )  }}
 --depends_on: {{  ref( 'dim_orderstatus' )  }}
+--depends_on: {{  ref( 'dim_address' )  }}
 
 select
     {{ dbt_utils.generate_surrogate_key(['stg_raw_data__salesorderdetail.salesorderid', 'salesorderdetailid']) }} as sales_key,
@@ -15,7 +16,6 @@ select
     {{ dbt_utils.generate_surrogate_key(['shipdate']) }} as ship_date_key,
     {{ dbt_utils.generate_surrogate_key(['duedate']) }} as due_date_key,
     {{ dbt_utils.generate_surrogate_key(['territoryid']) }} as territory_key, -- dim_territory
-    {{ dbt_utils.ge}}
     orderdate,
     onlineorderflag,
     stg_raw_data__salesorderdetail.unitpricediscount as unitpricediscount,
