@@ -29,7 +29,7 @@ select
     case when stg_raw_data__salesorderdetail.unitpricediscount > 0
         then stg_raw_data__salesorderdetail.linetotal * stg_raw_data__salesorderdetail.unitpricediscount 
         else stg_raw_data__salesorderdetail.linetotal
-        end as totaldiscount,
+    end as totaldiscount,
     int_salesorderheader.taxamt 
 from {{ ref("stg_raw_data__salesorderdetail") }}
 inner join  {{ ref("int_salesorderheader") }} on stg_raw_data__salesorderdetail.salesorderid = int_salesorderheader.salesorderid
