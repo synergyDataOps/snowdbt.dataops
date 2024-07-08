@@ -45,7 +45,6 @@ To run tests:
 
   *ToDo*
 
-
 ## dbt Data Pipeline < Transformation >
 
 ![1720192684966](image/README/1720192684966.png)
@@ -123,4 +122,4 @@ Permanent Tables for the final datamart : ( folder 3_marts )
 
 ## Automated Tests
 
-*ToDo*
+*ToDo3*
