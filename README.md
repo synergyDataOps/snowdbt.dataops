@@ -1,8 +1,10 @@
-## Hello Everyone
+## Short description
 
-## Commandes utiles
+*ToDo*
 
-Pour exécuter des modèles :
+## **Useful commands**
+
+To run models:
 
 > dbt clean & dbt deps
 
@@ -12,7 +14,7 @@ Pour exécuter des modèles :
 
 > $ dbt run -s 3_marts
 
-Pour exécuter des tests :
+To run tests:
 
 > $ dbt test --select "source:*"  # all sources
 
@@ -35,6 +37,14 @@ Pour exécuter des tests :
 ## Modèle Datamart Sales < Cible >
 
 ![1720108019504](image/README/1720108019504.png)
+
+## Environments
+
+* RAW_DATA
+* MODEL_DATA (MODEL_WRK)
+
+  *ToDo*
+
 
 ## dbt Data Pipeline < Transformation >
 
@@ -110,3 +120,7 @@ Permanent Tables for the final datamart : ( folder 3_marts )
   * transformations :
     * add the following serogate keys : sales_key, product_key, customer_key, creditcard_key, ship_address_key, order_status_key, order_date_key,  ship_date_key, due_date_key, territory_key
     * calculate the total discount amount
+
+## Automated Tests
+
+*ToDo*
