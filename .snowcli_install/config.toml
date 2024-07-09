@@ -1,0 +1,14 @@
+default_connection_name = "DATAOPS"
+[cli.logs]
+save_logs = true
+path = "/root/.config/snowflake/logs"
+level = "info"
+
+[connections.DATAOPS]
+account = "ip60316.eu-west-1"
+user = "PREY"
+password = "????"
+database = "SNOWDBT_TUTO"
+schema = "RAW_DATA"
+warehouse = "SNOWDBT_XS"
+role = "SYSADMIN"
