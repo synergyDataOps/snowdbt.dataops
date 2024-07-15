@@ -1,0 +1,34 @@
+# Use a slim version of the Python base image
+# To push a multi-platform build, use: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <image-name> --push .
+FROM --platform=linux/amd64 python:3.9.14-slim as python-base
+
+WORKDIR /
+
+# Combine apt-get commands and clean up after installations
+RUN apt-get clean \
+ && apt-get update \
+ && apt-get -y upgrade \
+ && apt-get --allow-releaseinfo-change update \
+ && apt-get install -y --no-install-recommends gcc libgl1-mesa-dev libdatrie-dev ffmpeg git \
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install --no-cache-dir pipx \
+ && pipx ensurepath \
+ && pipx install snowflake-cli-labs 
+
+
+# Créer un répertoire dans le conteneur
+RUN /bin/sh -c "mkdir -p ~/.config/"
+RUN /bin/sh -c "mkdir -p ~/.config/snowflake/"
+
+
+# Copier le fichier .env dans le conteneur
+COPY config.toml ~/.config/snowflake/config.toml
+
+# Définir les variables d'environnement à partir du fichier .env
+# SHELL ["/bin/bash","-c","/opt/src/scripts/setup.sh"]
+
+# RUN snow connection add --connection-name 'DATAOPS' --account 'ip60316.eu-west-1' --user 'PREY'  --silent
+
+# CMD ["/bin/bash", "-c", "snow connection add --connection-name 'DATAOPS' --account 'ip60316.eu-west-1' --user 'PREY'  --silent"]
+
+CMD [ "/bin/bash" ]

@@ -1,0 +1,79 @@
+C:\>python -m pip install --user pipx
+Collecting pipx
+  Downloading pipx-1.6.0-py3-none-any.whl.metadata (18 kB)
+Collecting argcomplete>=1.9.4 (from pipx)
+  Downloading argcomplete-3.4.0-py3-none-any.whl.metadata (16 kB)
+Requirement already satisfied: colorama>=0.4.4 in c:\users\reyp\apps\anaconda2\lib\site-packages (from pipx) (0.4.6)
+Requirement already satisfied: packaging>=20 in c:\users\reyp\apps\anaconda2\lib\site-packages (from pipx) (23.1)
+Requirement already satisfied: platformdirs>=2.1 in c:\users\reyp\apps\anaconda2\lib\site-packages (from pipx) (3.10.0)
+Collecting userpath!=1.9,>=1.6 (from pipx)
+  Downloading userpath-1.9.2-py3-none-any.whl.metadata (3.0 kB)
+Requirement already satisfied: click in c:\users\reyp\apps\anaconda2\lib\site-packages (from userpath!=1.9,>=1.6->pipx) (8.1.7)
+Downloading pipx-1.6.0-py3-none-any.whl (77 kB)
+   ---------------------------------------- 77.8/77.8 kB 4.2 MB/s eta 0:00:00
+Downloading argcomplete-3.4.0-py3-none-any.whl (42 kB)
+   ---------------------------------------- 42.6/42.6 kB 1.0 MB/s eta 0:00:00
+Downloading userpath-1.9.2-py3-none-any.whl (9.1 kB)
+Installing collected packages: argcomplete, userpath, pipx
+  WARNING: The script userpath.exe is installed in 'C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script pipx.exe is installed in 'C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed argcomplete-3.4.0 pipx-1.6.0 userpath-1.9.2
+
+C:\>cd C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts
+
+C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts>pipx.exe ensurepath
+Success! Added C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts to the PATH environment variable.
+C:\Users\reyp\.local\bin is already in PATH.
+
+Consider adding shell completions for pipx. Run 'pipx completions' for instructions.
+
+You will need to open a new terminal or re-login for the PATH changes to take effect. Alternatively, you can source
+your shell's config file with e.g. 'source ~/.bashrc'.
+
+Otherwise pipx is ready to go! ✨ 🌟 ✨
+
+C:\Users\reyp\AppData\Roaming\Python\Python311\Scripts>
+
+
+C:\>pipx install snowflake-cli-labs
+  installed package snowflake-cli-labs 2.5.0, installed using Python 3.11.7
+  These apps are now globally available
+    - snow.exe
+done! ✨ 🌟 ✨
+
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection add
+Name for this connection: snowdbt_dataops
+Snowflake account name: ip60316.eu-west-1
+Snowflake username: PREY
+Snowflake password [optional]:
+Role for the connection [optional]: SYSADMIN
+Warehouse for the connection [optional]: SNOWDBT_XS
+Database for the connection [optional]: SNOWDBT_TUTO
+Schema for the connection [optional]: RAW_DATA
+Connection host [optional]:
+Connection port [optional]:
+Snowflake region [optional]:
+Authentication method [optional]:
+Path to private key file [optional]:
+Wrote new connection snowdbt_dataops to C:\Users\reyp\AppData\Local\snowflake\config.toml
+
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection set-default "snowdbt_dataops"   
+Default connection set to: snowdbt_dataops
+
+(base) C:\Users\reyp\Repos\snowdbt.dataops>snow connection test
++------------------------------------------------------------+
+| key             | value                                    |
+|-----------------+------------------------------------------|
+| Connection name | None                                     |
+| Status          | OK                                       |
+| Host            | ip60316.eu-west-1.snowflakecomputing.com |
+| Account         | ip60316                                  |
+| User            | PREY                                     |
+| Role            | SYSADMIN                                 |
+| Database        | SNOWDBT_TUTO                             |
+| Warehouse       | SNOWDBT_XS                               |
++------------------------------------------------------------+

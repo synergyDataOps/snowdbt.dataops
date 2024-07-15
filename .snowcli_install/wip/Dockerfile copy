@@ -1,0 +1,40 @@
+# Use a slim version of the Python base image
+# To push a multi-platform build, use: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <image-name> --push .
+FROM --platform=linux/amd64 python:3.9.14-slim as python-base
+
+WORKDIR /
+
+
+# Combine apt-get commands and clean up after installations
+RUN apt-get clean \
+ && apt-get update \
+ && apt-get -y upgrade \
+ && apt-get --allow-releaseinfo-change update \
+ && apt-get install -y --no-install-recommends gcc libgl1-mesa-dev libdatrie-dev ffmpeg git \
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install --no-cache-dir pipx \
+ && pipx ensurepath \
+ && pipx install snowflake-cli-labs 
+
+# Copier le fichier .env dans le conteneur
+COPY .env /app/.env
+
+WORKDIR /app/.env
+
+# Définir les variables d'environnement à partir du fichier .env
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_ACCOUNT=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_ACCOUNT | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_USER=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_USER | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_PASSWORD=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_PASSWORD | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_DATABASE=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_DATABASE | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_SCHEMA=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_SCHEMA | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_ROLE=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_ROLE | cut -d '=' -f2)
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_WAREHOUSE=$(cat /app/.env | grep SNOWFLAKE_CONNECTIONS_DATAOPS_WAREHOUSE | cut -d '=' -f2)
+ENV SNOWFLAKE_DEFAULT_CONNECTION_NAME=$(cat /app/.env | grep SNOWFLAKE_DEFAULT_CONNECTION_NAME | cut -d '=' -f2)
+
+# Supprimer le fichier .env
+RUN rm /app/.env
+
+RUN snow connection add --connection-name "DATAOPS" --account "ip60316.eu-west-1" --user "PREY"  --silent
+
+CMD [ "/bin/bash" ]
+

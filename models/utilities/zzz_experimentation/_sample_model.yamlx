@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: sample_model
+    description: This is a test view to test a materialization
+    config:
+      materialized: incremental
+      unique_key: column_a
+      on_schema_change: append_new_columns
+      contract:
+        enforced: true
+    columns:
+      - name: column_a
+        description: This is a test column A in a view
+        data_type: int
+        constraints:
+          - type: not_null
+          - type: unique
+      - name: column_b
+        description: This is a test column B in a view
+        data_type: int
+      - name: col_text
+        description: This is a test column C in a view
+        data_type: varchar(50)
+      - name: col_text2
+        description: This is a test column C in a view
+        data_type: varchar(80)
+    constraints:
+      - type: primary_key
+        columns: [column_a]
+        name: pk_sample_model

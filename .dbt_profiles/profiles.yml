@@ -16,7 +16,7 @@ snowdbt_dataops:
       account: ip60316.eu-west-1 
       user: PREY
       password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_QA')}}"
-      database: SNOWDBT_TUTO
+      database: SNOWDBT_TUTO_QA
       schema: "{{env_var('PR_SCHEMA_NAME')}}"
       role: SYSADMIN
       warehouse: SNOWDBT_XS
@@ -26,7 +26,7 @@ snowdbt_dataops:
       account: ip60316.eu-west-1 
       user: PREY
       password: "{{env_var('SNOWFLAKE_PASSWORD_DBT_PROD')}}"
-      database: SNOWDBT_TUTO
+      database: SNOWDBT_TUTO_PROD
       schema: "{{env_var('PROD_SCHEMA_NAME')}}"
       role: SYSADMIN
       warehouse: SNOWDBT_XS

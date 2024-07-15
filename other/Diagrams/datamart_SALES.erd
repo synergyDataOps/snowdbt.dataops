@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="datamart_SALES.erd">
+	<entities>
+		<data-source id="snowflake_jdbc-1907c74c827-6f10b9d41883f1db">
+			<entity id="1" name="DIM_ADDRESS" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_ADDRESS" order="0" color-bg="0,128,255" x="66" y="342">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="2" name="DIM_CUSTOMER" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_CUSTOMER" order="6" color-bg="0,128,255" x="867" y="18">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="3" name="DIM_DATE" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_DATE" order="1" color-bg="0,128,255" border-width="3" x="855" y="586">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="4" name="DIM_ORDERSTATUS" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_ORDERSTATUS" order="2" color-bg="0,128,255" x="883" y="472">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="5" name="DIM_PRODUCT" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_PRODUCT" order="3" color-bg="0,128,255" x="39" y="31">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="6" name="DIM_TERRITORY" fq-name="SNOWDBT_TUTO.MODEL_DATA.DIM_TERRITORY" order="4" color-bg="0,128,255" x="48" y="594">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+			<entity id="7" name="FCT_SALES" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES" order="5" color-bg="255,128,64" x="442" y="265">
+				<path name="MODEL_DATA"/>
+				<path name="SNOWDBT_TUTO"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="FK_FCT_SALES_DIM_ADDRESS" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_ADDRESS" type="fk" pk-ref="1" fk-ref="7"/>
+		<relation name="FK_FCT_SALES_DIM_CUSTOMER" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_CUSTOMER" type="fk" pk-ref="2" fk-ref="7"/>
+		<relation name="FK_FCT_SALES_DIM_DATE" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_DATE" type="fk" pk-ref="3" fk-ref="7"/>
+		<relation name="FK_FCT_SALES_DIM_ORDERSTATUS" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_ORDERSTATUS" type="fk" pk-ref="4" fk-ref="7"/>
+		<relation name="FK_FCT_SALES_DIM_PRODUCT" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_PRODUCT" type="fk" pk-ref="5" fk-ref="7"/>
+		<relation name="FK_FCT_SALES_DIM_TERRITORY" fq-name="SNOWDBT_TUTO.MODEL_DATA.FCT_SALES.FK_FCT_SALES_DIM_TERRITORY" type="fk" pk-ref="6" fk-ref="7"/>
+	</relations>
+</diagram>
