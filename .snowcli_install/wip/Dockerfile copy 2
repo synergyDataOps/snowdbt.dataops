@@ -1,0 +1,33 @@
+# Use a slim version of the Python base image
+# To push a multi-platform build, use: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <image-name> --push .
+FROM --platform=linux/amd64 python:3.9.14-slim as python-base
+
+WORKDIR /
+
+# Combine apt-get commands and clean up after installations
+RUN apt-get clean \
+ && apt-get update \
+ && apt-get -y upgrade \
+ && apt-get --allow-releaseinfo-change update \
+ && apt-get install -y --no-install-recommends gcc libgl1-mesa-dev libdatrie-dev ffmpeg git \
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install --no-cache-dir pipx \
+ && pipx ensurepath \
+ && pipx install snowflake-cli-labs 
+
+
+# Définir les variables d'environnement à partir du fichier .env
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_ACCOUNT=ip60316.eu-west-1
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_USER=PREY
+# ENV SNOWFLAKE_CONNECTIONS_DATAOPS_PASSWORD=
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_DATABASE=SNOWDBT_TUTO
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_SCHEMA=RAW_DATA
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_ROLE=SYSADMIN
+ENV SNOWFLAKE_CONNECTIONS_DATAOPS_WAREHOUSE=SNOWDBT_XS
+ENV SNOWFLAKE_DEFAULT_CONNECTION_NAME=DATAOPS
+
+# RUN snow connection add --connection-name 'DATAOPS' --account 'ip60316.eu-west-1' --user 'PREY'  --silent
+
+# CMD ["/bin/bash", "-c", "snow connection add --connection-name 'DATAOPS' --account 'ip60316.eu-west-1' --user 'PREY'  --silent"]
+
+CMD [ "/bin/bash" ]
